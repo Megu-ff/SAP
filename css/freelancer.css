@@ -4,8 +4,9 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-freelancer/blob/master/LICENSE)
  */
 
-body {
+html, body {
   font-family: 'Lato';
+  height:100%;
 }
 
 h1,
@@ -130,11 +131,11 @@ section h2 {
 #mainNav .navbar-nav li.nav-item a.nav-link:active, #mainNav .navbar-nav li.nav-item a.nav-link:focus {
   color: #fff;
 }
-
+/*
 #mainNav .navbar-nav li.nav-item a.nav-link.active {
   color: #18BC9C;
 }
-
+*/
 #mainNav .navbar-toggler {
   font-size: 80%;
   padding: 0.8rem;
@@ -155,6 +156,7 @@ section h2 {
   #mainNav .navbar-nav {
     margin-top: 0;
   }
+  /*
   #mainNav .navbar-nav > li.nav-item > a.nav-link.active {
     color: #fff;
     background: #18BC9C;
@@ -163,6 +165,7 @@ section h2 {
     color: #fff;
     background: #18BC9C;
   }
+  */
   #mainNav.navbar-shrink {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -382,4 +385,8 @@ a:focus, a:hover, a:active {
 .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
   background-color: #1a252f;
   border-color: #1a252f;
-} 
+}
+
+.block{
+  height:100%;
+}

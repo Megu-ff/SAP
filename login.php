@@ -1,3 +1,14 @@
+<?php 
+include('functions/registerlogin.php');  
+if (isset($_GET['logout'])) {
+  session_destroy();
+  unset($_SESSION['username']);
+  header("location: login.php");
+}
+if (isset($_SESSION['user_id'])) {
+  header("location: index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,43 +41,43 @@
 
   <body id="page-top">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="index.php">SAP</a>
-        <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="index.php#page-top">SAP</a>
+      <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fas fa-bars"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="signup.php">Sign Up Here</a>
-            </li>
-          </ul>
-        </div>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="login.php">Login</a>
+          </li>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="register.php">Register</a>
+          </li>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
 
     <!-- Header -->
     <header class="masthead bg-primary text-white text-center">
       <div class="container">
-        <form action="includes/signup-inc.php">
+        <form method="POST" action="login.php">
           <div class="imgcontainer">
             <h1 class="font-weight-light mb-0">Login</h1>
           </div>
-            <p></p>
+            <span class="text-danger"><?php include('functions/errors.php'); ?></span>
           <div class="container">
             <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" required>
+            <input type="text" name="username" id="username" placeholder="Enter Username" required>
 
-            <label for="pwd"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="pwd" required>
+            <label for="password"><b>Password</b></label>
+            <input type="password" name="password" id="password" placeholder="Enter Password" required>
 
-            <button type="submit">Login</button>
-            <label>
-              <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
+            <button type="submit" name="loginuser">Login</button>
           </div>
       </form>
       </div>

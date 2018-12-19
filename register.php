@@ -1,3 +1,14 @@
+<?php 
+include('functions/registerlogin.php');  
+if (isset($_GET['logout'])) {
+  session_destroy();
+  unset($_SESSION['username']);
+  header("location: login.php");
+}
+if (isset($_SESSION['user_id'])) {
+  header("location: index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,28 +33,37 @@
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="css/freelancer.min.css" rel="stylesheet">
+    <link href="css/freelancer.css" rel="stylesheet">
 	
-	<link href="css/mycss.css" rel="stylesheet">
+  	<link href="css/mycss.css" rel="stylesheet">
 
   </head>
 
   <body id="page-top">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="index.php">SAP</a>
-        <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="index.php#page-top">SAP</a>
+      <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fas fa-bars"></i>
         </button>
-
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="login.php">Login</a>
+          </li>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="register.php">Register</a>
+          </li>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
 
     <!-- Header -->
-<form action="includes/signup-inc.php" style="border:1px solid #ccc" method="POST">
+<form action="register.php" style="border:1px solid #ccc" method="POST">
   <div class="container">
       <br>
       <br>
@@ -53,36 +73,33 @@
       <br>
     <h1>Sign Up</h1>
     <p>Please fill in this form to create an account.</p>
+    <span class="text-danger"><?php include('functions/errors.php'); ?></span>
     
     <hr>
 	
 	  <label for="username"><b>User Name</b></label>
-    <input type="text" placeholder="Enter Username (only letters and numbers are allowed)" name="username" required>
+    <input type="text" name="username" id="username" placeholder="Enter Username (only letters and numbers are allowed)" required>
 
     <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="email" name="email" id="email" placeholder="Enter Email" required>
 
-    <label for="pwd"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="pwd" required>
+    <label for="pass1"><b>Password</b></label>
+    <input type="password" name="pass1" id="pass1" placeholder="Enter Password" required>
 
-    <label for="pwd-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="pwd-repeat" required>
-
-    <label>
-      <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-    </label>
+    <label for="pass2"><b>Repeat Password</b></label>
+    <input type="password" name="pass2" id="pass2" placeholder="Repeat Password" required>
 
     <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 
     <div class="clearfix">
       <button type="button" class="cancelbtn">Cancel</button>
-      <button type="submit" name="submit" class="signupbtn">Sign Up</button>
+      <button type="submit" name="registeruser" class="signupbtn">Sign Up</button>
     </div>
   </div>
 </form>
 
 
-   <!-- Footer -->
+  <!-- Footer -->
     <?php
 	    include_once 'footer.php';
 	  ?>

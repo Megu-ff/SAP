@@ -1,3 +1,11 @@
+<?php 
+include('functions/registerlogin.php');  
+if (isset($_GET['logout'])) {
+  session_destroy();
+  unset($_SESSION['username']);
+  header("location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +30,7 @@
   <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template -->
-  <link href="css/freelancer.min.css" rel="stylesheet">
+  <link href="css/freelancer.css" rel="stylesheet">
 
 </head>
 
@@ -31,22 +39,28 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">SAP</a>
+      <a class="navbar-brand js-scroll-trigger" href="index.php#page-top">SAP</a>
       <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fas fa-bars"></i>
         </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+          <?php if (isset($_SESSION['user_id'])): ?>
           <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="login.php">Login/Register</a>
+            <a class="nav-link js-scroll-trigger" href="#">Account</a>
           </li>
           <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+            <a class="nav-link js-scroll-trigger" href="index.php?logout='1'" style="color: red;">Logout</a>
+          </li>
+          <?php else: ?>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="login.php">Login</a>
           </li>
           <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="register.php">Register</a>
           </li>
+          <?php endif ?>
         </ul>
       </div>
     </div>
@@ -55,7 +69,11 @@
   <!-- Header -->
   <header class="masthead bg-primary text-white text-center">
     <div class="container">
+      <?php if (isset($_SESSION['user_id'])): ?>
+      <h1 class="mb-5">Welcome <?php echo $_SESSION['username'] ?>!</h1>
+      <?php else: ?>
       <h1 class="font-weight-light mb-0">SAP Project</h1>
+      <?php endif ?>
       <hr class="star-light">
       <img class="img-fluid mb-5 d-block mx-auto" src="img/smallforum.png" alt="">
 
@@ -75,7 +93,7 @@
 
       </div>
       <div class="text-center mt-4">
-        <a class="btn btn-xl btn-outline-light" href="#">
+        <a class="btn btn-xl btn-outline-light" href="register.php">
             <i class="fas fa-download mr-2"></i>
             Sign up now!
         </a>
